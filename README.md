@@ -9,11 +9,15 @@
 
 安装后，创建自己的第一个 Vault，并复制它的完整路径。
 
-## 2. 不用 Git，下载配置 ZIP
+## 2. 安装配置包（二选一）
+
+### 方式 A：下载 ZIP（不用 Git）
 
 打开 GitHub 项目页面，点击 **Code → Download ZIP**，或直接下载：
 
 <https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main.zip>
+
+### 方式 B：使用 Git
 
 如果已经安装 Git，也可以直接运行：
 
@@ -21,7 +25,7 @@
 git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 ```
 
-解压后，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`terminal` 三个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
+无论选择哪种方式，打开项目目录，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`terminal` 三个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
 
 只复制这三个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
 
@@ -30,9 +34,9 @@ git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 - **macOS**：在 Finder 中按 `Command + Shift + .`；
 - **Windows**：文件资源管理器选择 **查看 → 显示 → 隐藏的项目**。
 
-## 3. 复制给 WorkBuddy / TraeWork 的安装提示词
+## 3. 交给 AI 自动安装（可选）
 
-把下面提示词复制到 WorkBuddy、TraeWork、Codex 等支持本地文件操作的 AI 工具中，并填入自己的 Vault 路径。
+如果希望让 AI 代为下载和复制，可以使用下面提示词；它与上面的两种手动安装方式任选其一。把提示词复制到 WorkBuddy、TraeWork、Codex 等支持本地文件操作的 AI 工具中，并填入自己的 Vault 路径。
 
 ```text
 我的 Obsidian 仓库路径是：
