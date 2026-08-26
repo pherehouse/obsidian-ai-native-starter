@@ -10,6 +10,17 @@
 
 文章里提到的 **Obsidian CLI** 不是一个社区插件，而是 Obsidian 提供的 CLI 能力。它需要在你的 Obsidian 版本中单独开启；无论你从 WorkBuddy、TraeWork 等外部 AI 进入，还是从 Obsidian 内部运行 AI CLI，都可以调用它。
 
+## Obsidian 安装包
+
+如果还没有安装 Obsidian，可以直接下载本项目 Release 中的 1.13.7 安装包：
+
+- [macOS 安装包（DMG）](https://github.com/pherehouse/obsidian-ai-native-starter/releases/download/obsidian-1.13.7/Obsidian-1.13.7.dmg)
+- [Windows 安装包（EXE）](https://github.com/pherehouse/obsidian-ai-native-starter/releases/download/obsidian-1.13.7/Obsidian-1.13.7.exe)
+
+两个安装包都比较大，GitHub 普通仓库单个文件不能超过 100 MB，所以它们作为 Release 附件提供，不放在代码目录里。也可以从 [Obsidian 官网](https://obsidian.md/download) 下载最新版。
+
+安装包的版本和校验值记录在 [`安装包与下载.md`](安装包与下载.md)。
+
 ## 不用 Git：下载 ZIP 安装
 
 1. 打开本仓库的 GitHub 页面，点击 **Code → Download ZIP**，或直接下载：
@@ -49,6 +60,10 @@
 我没有 Git，请使用 HTTPS 下载并解压这个配置包：
 https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main.zip
 
+如果电脑还没有 Obsidian，请先按系统下载并安装：
+- macOS：https://github.com/pherehouse/obsidian-ai-native-starter/releases/download/obsidian-1.13.7/Obsidian-1.13.7.dmg
+- Windows：https://github.com/pherehouse/obsidian-ai-native-starter/releases/download/obsidian-1.13.7/Obsidian-1.13.7.exe
+
 请按以下规则操作：
 1. 先确认上面的路径确实是一个 Obsidian Vault；
 2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、terminal 三个插件文件夹复制到我的 Vault/.obsidian/plugins/；
@@ -63,9 +78,9 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 
 如果 AI 工具没有下载或写入本地文件的权限，就按上面的“下载 ZIP 安装”方式手动复制；提示词本身不需要 Git。
 
-## 第一次体验：让 AI 生成一套西安旅行资料
+## 第一次体验：让 AI 生成一套北京旅行资料
 
-插件装好后，先不要搭复杂知识库。复制 [`提示词/西安三日游-首次体验.md`](提示词/西安三日游-首次体验.md) 到 AI 聊天窗口，把 Vault 路径填进去，就能看到 AI 如何直接在本地生成 Markdown 文件。
+插件装好后，先不要搭复杂知识库。复制 [`提示词/北京三日游-首次体验.md`](提示词/北京三日游-首次体验.md) 到 AI 聊天窗口，把 Vault 路径填进去，就能看到 AI 如何直接在本地生成 Markdown 文件。
 
 ## 手动安装
 
