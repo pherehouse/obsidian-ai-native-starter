@@ -65,9 +65,15 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 
 MarkItDown 首次使用需要 Python 和 `markitdown` 包，按插件设置中的检查或安装提示操作。
 
-**Obsidian CLI** 不是社区插件，不在 `.obsidian/plugins` 中。它是 Obsidian 提供的命令行能力，需要在支持的版本中单独开启，参考[官方说明](https://obsidian.md/help/cli)。外部 AI 和 Obsidian 内部的 AI CLI 都可以调用它。
+## 5. 让 AI 更懂 Obsidian：安装 Skill
 
-## 5. 第一次体验：让 AI 生成一套北京旅行资料
+不必先学习 CLI 命令。WorkBuddy 和 TraeWork 都可以在技能中心搜索 **Obsidian**，直接安装相关技能。
+
+也可以使用 GitHub 上的 [`obsidian-cli` Skill](https://github.com/kepano/obsidian-skills/tree/main/skills/obsidian-cli)。它负责教 AI 使用 Obsidian 的搜索、创建、双链和属性等能力。安装 Skill 后，按工具提示开启 Obsidian CLI 即可。
+
+如果技能中心没有显示，直接把上面的 GitHub 地址导入即可。
+
+## 6. 第一次体验：让 AI 生成一套北京旅行资料
 
 插件装好后，把下面提示词复制到 AI 聊天窗口，并填入 Vault 路径：
 
