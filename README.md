@@ -15,6 +15,12 @@
 
 <https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main.zip>
 
+如果已经安装 Git，也可以直接运行：
+
+```bash
+git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
+```
+
 解压后，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`terminal` 三个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
 
 只复制这三个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
