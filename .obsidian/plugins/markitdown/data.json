@@ -1,0 +1,17 @@
+{
+  "pythonPath": "python",
+  "enablePlugins": false,
+  "pluginArgs": [],
+  "docintelEndpoint": "",
+  "outputPath": "",
+  "imageExtractionEnabled": false,
+  "imageSubfolderTemplate": "{filename}-images",
+  "enableBatchProgress": true,
+  "enableContextMenu": true,
+  "enableRecursiveConversion": false,
+  "outputFilenameTemplate": "{filename}",
+  "enableDragDrop": true,
+  "enableAutoFrontmatter": false,
+  "autoTags": "",
+  "conversionHistory": []
+}
