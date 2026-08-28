@@ -25,9 +25,11 @@
 git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 ```
 
-无论选择哪种方式，打开项目目录，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`terminal` 三个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
+无论选择哪种方式，打开项目目录，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`obsidian-html-plugin`、`ppt-viewer`、`terminal`、`univer` 六个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
 
-只复制这三个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
+只复制这六个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
+
+Smart Composer 通过官方 Release 安装：打开 [1.2.9 发布页](https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9)，下载 `main.js`、`manifest.json`、`styles.css`，放入 `Vault/.obsidian/plugins/smart-composer/`。
 
 ### 看不到 `.obsidian`？
 
@@ -47,27 +49,34 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 
 请按以下规则操作：
 1. 先确认上面的路径确实是一个 Obsidian Vault；
-2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、terminal 三个插件文件夹复制到我的 Vault/.obsidian/plugins/；
-3. 不要覆盖 Vault 中其他插件、主题、快捷键或 workspace 配置；
-4. 如果目标插件已经存在，先改名备份，再复制新版本；
-5. 在 Vault 根目录新建“收件箱”“工作”“资料”“归档”四个文件夹；
-6. 新建“收件箱/AI 原生起步.md”，说明插件已经复制完成，并提醒我重启 Obsidian 后到“设置 → 社区插件”启用插件；
-7. 不要修改已有笔记；无法下载或无法写入时，直接告诉我具体原因，不要猜测成功。
+2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、obsidian-html-plugin、ppt-viewer、terminal、univer 六个插件文件夹复制到我的 Vault/.obsidian/plugins/；
+3. 创建 Vault/.obsidian/plugins/smart-composer/，从 Smart Composer 官方 1.2.9 Release 下载 main.js、manifest.json、styles.css 放入该文件夹：https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9；
+4. 不要覆盖 Vault 中其他插件、主题、快捷键或 workspace 配置；
+5. 如果目标插件已经存在，先改名备份，再复制新版本；
+6. 在 Vault 根目录新建“收件箱”“工作”“资料”“归档”四个文件夹；
+7. 新建“收件箱/AI 原生起步.md”，说明插件已经复制完成，并提醒我重启 Obsidian 后到“设置 → 社区插件”启用插件；
+8. 不要修改已有笔记；无法下载或无法写入时，直接告诉我具体原因，不要猜测成功。
 
 全部完成后，只汇报实际创建和复制了哪些文件。
 ```
 
 如果 AI 工具没有下载或写入本地文件的权限，就手动下载 ZIP 并复制插件。
 
-## 4. 这三个插件分别做什么
+## 4. 这七个插件分别做什么
 
 | 插件 | 作用 | 版本 | 来源 |
 | --- | --- | --- | --- |
 | Docxer | 预览 Word，并转换为 Markdown | 2.3.1 | [obsidian-docxer](https://github.com/Developer-Mike/obsidian-docxer) |
 | MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
+| PPT Viewer | 直接预览 PPT、PPTX | 1.0.0 | 本地插件包 |
+| Univer | 预览和编辑 Excel 等表格文件 | 1.1.5 | [obsidian-univer](https://github.com/dream-num/obsidian-univer) |
+| HTML Reader | 直接预览 HTML、HTM | 1.0.14 | [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin) |
+| Smart Composer | 在 Obsidian 内与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
 | Terminal | 在 Obsidian 内打开终端，运行 AI CLI | 3.25.0 | [obsidian-terminal](https://github.com/polyipseity/obsidian-terminal) |
 
 MarkItDown 首次使用需要 Python 和 `markitdown` 包，按插件设置中的检查或安装提示操作。
+
+Smart Composer 需要配置自己的模型服务；例如在 **设置 → Smart Composer → Providers** 中选择 DeepSeek，填入自己申请的 API Key，再选择模型即可。本配置包不包含任何账号或密钥。
 
 ## 5. 让 AI 更懂 Obsidian：安装 Skill
 

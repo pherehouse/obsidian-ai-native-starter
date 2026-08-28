@@ -1,0 +1,434 @@
+/* PPT Viewer Plugin Styles */
+
+.ppt-viewer-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ppt-viewer-root {
+  height: 100%;
+}
+
+.ppt-preview-chrome-root {
+  position: relative;
+}
+
+.ppt-preview-chrome-root:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  background: #111111;
+}
+
+.ppt-preview-chrome-root:fullscreen .ppt-accurate-pages {
+  padding: 0;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.ppt-preview-chrome-root:fullscreen .ppt-accurate-page-img {
+  max-width: none;
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 0;
+  object-fit: contain;
+  box-shadow: none;
+  scroll-snap-align: start;
+}
+
+.ppt-preview-chrome-root:fullscreen .ppt-slide-wrapper {
+  padding: 0;
+}
+
+.ppt-toolbar-collapsed .ppt-accurate-toolbar,
+.ppt-toolbar-collapsed .ppt-navigation {
+  display: none;
+}
+
+.ppt-toolbar-restore-btn {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  border-radius: 0 0 6px 6px;
+  background: rgba(20, 20, 20, 0.42);
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.55;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.ppt-toolbar-restore-btn:hover {
+  opacity: 0.85;
+  background: rgba(20, 20, 20, 0.6);
+}
+
+.ppt-preview-chrome-root:fullscreen .ppt-toolbar-restore-btn {
+  position: fixed;
+}
+
+.ppt-layout {
+  display: flex;
+  height: 100%;
+  gap: 0;
+  position: relative;
+}
+
+/* Sidebar */
+.ppt-sidebar {
+  width: 180px;
+  min-width: 180px;
+  background: var(--background-secondary);
+  border-right: 1px solid var(--background-modifier-border);
+  overflow-y: auto;
+  padding: 8px;
+  transition: width 0.3s ease, min-width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+}
+
+/* Sidebar toggle button */
+.ppt-sidebar-toggle {
+  position: absolute;
+  left: 180px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: left 0.3s ease;
+}
+
+.ppt-sidebar-toggle:hover {
+  color: var(--text-normal);
+  background: var(--background-primary-alt);
+}
+
+/* Sidebar collapsed state */
+.ppt-sidebar-collapsed .ppt-sidebar {
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border-right: none;
+  opacity: 0;
+}
+
+.ppt-sidebar-collapsed .ppt-sidebar-toggle {
+  left: 0;
+}
+
+.ppt-sidebar-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 8px 8px 12px;
+}
+
+.ppt-thumb-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ppt-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--background-primary);
+  transition: all 0.15s ease;
+}
+
+.ppt-thumb:hover {
+  border-color: var(--interactive-accent);
+  background: var(--background-primary-alt);
+}
+
+.ppt-thumb-active {
+  border-color: var(--interactive-accent);
+  background: var(--background-primary-alt);
+  box-shadow: 0 0 0 1px var(--interactive-accent);
+}
+
+.ppt-thumb-number {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-normal);
+}
+
+/* Main Area */
+.ppt-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--background-secondary);
+}
+
+.ppt-slide-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ppt-slide-container {
+  position: absolute;
+  width: 960px;
+  height: 540px;
+  background: white;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: visible;
+  transform-origin: center center;
+}
+
+/* Elements */
+.ppt-element {
+  position: absolute;
+}
+
+.ppt-element-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: visible;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: pre-wrap;
+}
+
+.ppt-paragraph {
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  min-height: 1em;
+  white-space: pre-wrap;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.ppt-text-nowrap .ppt-paragraph {
+  white-space: pre;
+}
+
+.ppt-element-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ppt-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: none;
+}
+
+.ppt-element-shape {
+  border-radius: 2px;
+}
+
+/* Navigation */
+.ppt-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background: var(--background-primary);
+  border-top: 1px solid var(--background-modifier-border);
+}
+
+.ppt-nav-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--interactive-normal);
+  color: var(--text-normal);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.ppt-collapse-toolbar-btn,
+.ppt-fullscreen-btn {
+  white-space: nowrap;
+}
+
+.ppt-nav-btn:hover {
+  background: var(--interactive-hover);
+  border-color: var(--interactive-accent);
+  color: var(--interactive-accent);
+}
+
+.ppt-nav-btn:active {
+  background: var(--interactive-accent);
+  color: white;
+}
+
+.ppt-slide-counter {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Accurate PDF preview */
+.ppt-accurate-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--background-secondary);
+}
+
+.ppt-accurate-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--background-primary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.ppt-accurate-status {
+  margin-right: auto;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.ppt-accurate-frame {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  border: 0;
+  background: #ffffff;
+}
+
+.ppt-accurate-pages {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+  background: var(--background-secondary);
+}
+
+.ppt-accurate-page-img {
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  height: auto;
+  margin: 0 auto 16px;
+  background: #ffffff;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.16);
+}
+
+.ppt-accurate-hint {
+  margin: 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Error State */
+.ppt-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 48px;
+  text-align: center;
+}
+
+.ppt-error h3 {
+  color: var(--text-error);
+  margin-bottom: 8px;
+}
+
+.ppt-error p {
+  color: var(--text-muted);
+  margin: 4px 0;
+}
+
+.ppt-error-hint {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.ppt-open-external-btn {
+  margin-left: auto;
+}
+
+.ppt-accurate-preview-btn {
+  margin-left: auto;
+}
+
+.ppt-accurate-preview-btn + .ppt-open-external-btn {
+  margin-left: 0;
+}
+
+.ppt-accurate-loading {
+  margin: 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Table styles */
+.ppt-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  table-layout: fixed;
+}
+
+.ppt-table td {
+  border: 1px solid #bbb;
+  padding: 4px 6px;
+  vertical-align: middle;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+.ppt-table tr:first-child td {
+  font-weight: bold;
+  background-color: #4472c4;
+  color: white;
+}
+
+/* Dark theme adjustments */
+.theme-dark .ppt-slide-container {
+  background: #ffffff;
+}
