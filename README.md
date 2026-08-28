@@ -62,17 +62,19 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 
 如果 AI 工具没有下载或写入本地文件的权限，就手动下载 ZIP 并复制插件。
 
-## 4. 这七个插件分别做什么
+## 4. 按三类能力理解这些插件
 
-| 插件 | 作用 | 版本 | 来源 |
-| --- | --- | --- | --- |
-| Docxer | 预览 Word，并转换为 Markdown | 2.3.1 | [obsidian-docxer](https://github.com/Developer-Mike/obsidian-docxer) |
-| MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
-| PPT Viewer | 直接预览 PPT、PPTX | 1.0.0 | 本地插件包 |
-| Univer | 预览和编辑 Excel 等表格文件 | 1.1.5 | [obsidian-univer](https://github.com/dream-num/obsidian-univer) |
-| HTML Reader | 直接预览 HTML、HTM | 1.0.14 | [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin) |
-| Smart Composer | 在 Obsidian 内与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
-| Terminal | 在 Obsidian 内打开终端，运行 AI CLI | 3.25.0 | [obsidian-terminal](https://github.com/polyipseity/obsidian-terminal) |
+| 类别 | 插件 | 作用 | 版本 | 来源 |
+| --- | --- | --- | --- | --- |
+| 常见办公文档预览 + AI 处理 | Docxer | 预览 Word，并转换为 Markdown | 2.3.1 | [obsidian-docxer](https://github.com/Developer-Mike/obsidian-docxer) |
+| 常见办公文档预览 | PPT Viewer | 直接预览 PPT、PPTX | 1.0.0 | 本地插件包 |
+| 常见办公文档预览 | Univer | 预览和编辑 Excel 等表格文件 | 1.1.5 | [obsidian-univer](https://github.com/dream-num/obsidian-univer) |
+| AI 友好文档预览 | HTML Reader | 直接预览 HTML、HTM | 1.0.14 | [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin) |
+| AI 友好文档处理 | MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
+| 在 Obsidian 中使用 AI | Smart Composer | 与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
+| 在 Obsidian 中使用 AI | Terminal | 在 Obsidian 内运行 AI CLI | 3.25.0 | [obsidian-terminal](https://github.com/polyipseity/obsidian-terminal) |
+
+Docxer 横跨前两类能力：既能查看原始 Word，也能生成适合 AI 处理的 Markdown。
 
 MarkItDown 首次使用需要 Python 和 `markitdown` 包，按插件设置中的检查或安装提示操作。
 
