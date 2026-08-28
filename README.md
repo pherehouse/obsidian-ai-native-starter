@@ -67,15 +67,17 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 | 类别 | 插件 | 作用 | 版本 | 来源 |
 | --- | --- | --- | --- | --- |
 | 常见办公文档预览 + AI 处理 | Docxer | 预览 Word，并转换为 Markdown | 2.3.1 | [obsidian-docxer](https://github.com/Developer-Mike/obsidian-docxer) |
-| 常见办公文档预览 | PPT Viewer | 直接预览 PPT、PPTX | 1.0.0 | 本地插件包 |
+| 常见办公文档预览 | PPT Viewer | 直接预览 PPT、PPTX | 1.0.0 | phere |
 | 常见办公文档预览 | Univer | 预览和编辑 Excel 等表格文件 | 1.1.5 | [obsidian-univer](https://github.com/dream-num/obsidian-univer) |
-| AI 友好文档预览、处理与传播 | HTML Reader | 直接预览 HTML、HTM | 1.0.14 | [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin) |
+| AI 友好文档预览、处理与传播 | HTML Reader | 直接预览 HTML、HTM | 1.0.14 | 基于 [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin)，由 phere 调整 |
 | AI 友好文档预览、处理与传播 | MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
 | AI 友好文档预览、处理与传播 | md2html | 将 Markdown 转为带目录和样式的 HTML，方便浏览器阅读和分享 | 0.1.0 | phere |
 | 在 Obsidian 中使用 AI | Smart Composer | 与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
 | 在 Obsidian 中使用 AI | Terminal | 在 Obsidian 内运行 AI CLI | 3.25.0 | [obsidian-terminal](https://github.com/polyipseity/obsidian-terminal) |
 
 Docxer 横跨前两类能力：既能查看原始 Word，也能生成适合 AI 处理的 Markdown。
+
+其中 PPT Viewer 和 md2html 由 phere 编写；HTML Reader 基于原作者版本调整；其余插件来自表格中链接的原作者项目。
 
 MarkItDown 首次使用需要 Python 和 `markitdown` 包，按插件设置中的检查或安装提示操作。
 
@@ -122,4 +124,4 @@ Smart Composer 需要配置自己的模型服务；例如在 **设置 → Smart 
 
 ## 版权说明
 
-插件作者、源代码和许可协议归各自原作者所有，详见 [`NOTICE.md`](NOTICE.md)。本仓库只做配套整理，不修改插件代码。
+插件作者、来源和改编情况详见 [`NOTICE.md`](NOTICE.md)。本仓库同时包含 phere 编写或调整的插件，以及其他原作者发布的第三方插件。
