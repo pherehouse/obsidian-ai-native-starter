@@ -1,0 +1,9 @@
+{
+  "id": "md2html",
+  "name": "md2html",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "把当前 Markdown 笔记一键转换为带左侧悬浮目录的样式化 HTML，保存在同目录下。",
+  "author": "phere",
+  "isDesktopOnly": false
+}

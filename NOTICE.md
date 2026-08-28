@@ -4,6 +4,7 @@
 
 - Docxer — [Developer-Mike/obsidian-docxer](https://github.com/Developer-Mike/obsidian-docxer)
 - MarkItDown File Converter — [ethanolivertroy/obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown)
+- md2html — phere
 - PPT Viewer — 本地插件包，插件清单未提供源码地址
 - Univer — [dream-num/obsidian-univer](https://github.com/dream-num/obsidian-univer)
 - HTML Reader — [nuthrash/obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin)

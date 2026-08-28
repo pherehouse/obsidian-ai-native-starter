@@ -25,9 +25,9 @@
 git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 ```
 
-无论选择哪种方式，打开项目目录，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`obsidian-html-plugin`、`ppt-viewer`、`terminal`、`univer` 六个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
+无论选择哪种方式，打开项目目录，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`md2html`、`obsidian-html-plugin`、`ppt-viewer`、`terminal`、`univer` 七个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
 
-只复制这六个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
+只复制这七个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
 
 Smart Composer 通过官方 Release 安装：打开 [1.2.9 发布页](https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9)，下载 `main.js`、`manifest.json`、`styles.css`，放入 `Vault/.obsidian/plugins/smart-composer/`。
 
@@ -49,7 +49,7 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 
 请按以下规则操作：
 1. 先确认上面的路径确实是一个 Obsidian Vault；
-2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、obsidian-html-plugin、ppt-viewer、terminal、univer 六个插件文件夹复制到我的 Vault/.obsidian/plugins/；
+2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、md2html、obsidian-html-plugin、ppt-viewer、terminal、univer 七个插件文件夹复制到我的 Vault/.obsidian/plugins/；
 3. 创建 Vault/.obsidian/plugins/smart-composer/，从 Smart Composer 官方 1.2.9 Release 下载 main.js、manifest.json、styles.css 放入该文件夹：https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9；
 4. 不要覆盖 Vault 中其他插件、主题、快捷键或 workspace 配置；
 5. 如果目标插件已经存在，先改名备份，再复制新版本；
@@ -69,8 +69,9 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 | 常见办公文档预览 + AI 处理 | Docxer | 预览 Word，并转换为 Markdown | 2.3.1 | [obsidian-docxer](https://github.com/Developer-Mike/obsidian-docxer) |
 | 常见办公文档预览 | PPT Viewer | 直接预览 PPT、PPTX | 1.0.0 | 本地插件包 |
 | 常见办公文档预览 | Univer | 预览和编辑 Excel 等表格文件 | 1.1.5 | [obsidian-univer](https://github.com/dream-num/obsidian-univer) |
-| AI 友好文档预览 | HTML Reader | 直接预览 HTML、HTM | 1.0.14 | [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin) |
-| AI 友好文档处理 | MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
+| AI 友好文档预览、处理与传播 | HTML Reader | 直接预览 HTML、HTM | 1.0.14 | [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin) |
+| AI 友好文档预览、处理与传播 | MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
+| AI 友好文档预览、处理与传播 | md2html | 将 Markdown 转为带目录和样式的 HTML，方便浏览器阅读和分享 | 0.1.0 | phere |
 | 在 Obsidian 中使用 AI | Smart Composer | 与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
 | 在 Obsidian 中使用 AI | Terminal | 在 Obsidian 内运行 AI CLI | 3.25.0 | [obsidian-terminal](https://github.com/polyipseity/obsidian-terminal) |
 
