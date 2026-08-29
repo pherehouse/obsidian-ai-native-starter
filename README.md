@@ -29,7 +29,7 @@ git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 
 只复制这七个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
 
-Smart Composer 通过官方 Release 安装：打开 [1.2.9 发布页](https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9)，下载 `main.js`、`manifest.json`、`styles.css`，放入 `Vault/.obsidian/plugins/smart-composer/`。
+如果无法访问插件市场，Smart Composer 可以从作者的 [1.2.9 官方发布页](https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9) 手动安装：下载 `main.js`、`manifest.json`、`styles.css`，放入 `Vault/.obsidian/plugins/smart-composer/`。
 
 ### 看不到 `.obsidian`？
 
@@ -50,9 +50,9 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 请按以下规则操作：
 1. 先确认上面的路径确实是一个 Obsidian Vault；
 2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、md2html、obsidian-html-plugin、ppt-viewer、terminal、univer 七个插件文件夹复制到我的 Vault/.obsidian/plugins/；
-3. 创建 Vault/.obsidian/plugins/smart-composer/，从 Smart Composer 官方 1.2.9 Release 下载 main.js、manifest.json、styles.css 放入该文件夹：https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9；
+3. 创建 Vault/.obsidian/plugins/smart-composer/，从 Smart Composer 作者的 1.2.9 官方发布页下载 main.js、manifest.json、styles.css 放入该文件夹：https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9；
 4. 不要覆盖 Vault 中其他插件、主题、快捷键或 workspace 配置；
-5. 如果目标插件已经存在，先改名备份，再复制新版本；
+5. 如果目标插件已经存在，先备份到 Vault 根目录的“插件备份”文件夹，再复制新版本；不要把备份留在 .obsidian/plugins/ 内；
 6. 在 Vault 根目录新建“收件箱”“工作”“资料”“归档”四个文件夹；
 7. 新建“收件箱/AI 原生起步.md”，说明插件已经复制完成，并提醒我重启 Obsidian 后到“设置 → 社区插件”启用插件；
 8. 不要修改已有笔记；无法下载或无法写入时，直接告诉我具体原因，不要猜测成功。
@@ -62,7 +62,7 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 
 如果 AI 工具没有下载或写入本地文件的权限，就手动下载 ZIP 并复制插件。
 
-## 4. 按三类能力理解这些插件
+## 4. 本包包含什么
 
 | 类别 | 插件 | 作用 | 版本 | 来源 |
 | --- | --- | --- | --- | --- |
@@ -91,36 +91,9 @@ Smart Composer 需要配置自己的模型服务；例如在 **设置 → Smart 
 
 如果技能中心没有显示，直接把上面的 GitHub 地址导入即可。
 
-## 6. 第一次体验：让 AI 生成一套北京旅行资料
+## 6. 下一步
 
-插件装好后，把下面提示词复制到 AI 聊天窗口，并填入 Vault 路径：
-
-```text
-我的 Obsidian 仓库路径是：
-【把仓库的完整路径粘贴到这里】
-
-请在这个仓库中新建一个“北京三日游”项目。
-
-背景：
-有朋友第一次来北京，准备玩三天。
-希望去故宫、八达岭长城和颐和园，也想体验北京本地美食。
-行程不要太赶，尽量减少来回奔波。
-
-请直接完成以下工作：
-1. 新建“北京三日游”文件夹；
-2. 建立“行程”“清单”“资料”三个子文件夹；
-3. 生成三天的行程安排，每天单独保存为一篇 Markdown；
-4. 生成景点预约、美食推荐和行前准备清单；
-5. 创建一篇“旅行总览”，用 Obsidian 双链连接所有笔记；
-6. 最后生成一份“北京旅行规划报告”。
-
-要求：
-- 所有文件使用中文名称和 Markdown 格式；
-- 只在新建的“北京三日游”文件夹内操作；
-- 不要修改仓库中已有的内容；
-- 无法确认的票价、开放时间和预约政策，标记为“出发前核实”；
-- 不要中途询问，全部完成后再告诉我生成了哪些内容。
-```
+安装完成后，回到配套文章，复制“北京三日游”提示词完成第一次体验。本文档只负责帮助你装好 Obsidian、插件和可选的 AI 能力。
 
 ## 版权说明
 

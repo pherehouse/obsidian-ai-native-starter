@@ -1,7 +1,7 @@
 {
   "bgColorEnabled": false,
   "bgColor": "#ffffff",
-  "opMode": "UnestrictedMode",
+  "opMode": "BalanceMode",
   "zoomByWheelAndGesture": true,
   "zoomValue": 1,
   "extraFileExt": "",
