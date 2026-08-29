@@ -1,13 +1,13 @@
 # Obsidian AI 原生起步包
 
-这是一个帮助你快速配置 Obsidian AI 工作环境的起步包，也配套文章《别再把 AI 只当聊天框：用 Obsidian 搭一个 AI 原生工作空间》。
+这是《别再把 AI 只当聊天框：用 Obsidian 搭一个 AI 原生工作空间》的配套起步包，用来快速配置 Obsidian AI 工作环境。
 
 ## 1. 先安装 Obsidian
 
 - 官方下载：<https://obsidian.md/download>
 - 国内镜像：<https://obsidian.bijitongbu.site/>
 
-安装后，创建自己的第一个 Vault，并复制它的完整路径。
+安装后创建第一个 Vault。如果要让 AI 自动安装插件，再复制它的完整路径。
 
 ## 2. 安装配置包（二选一）
 
@@ -27,9 +27,9 @@ git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 
 无论选择哪种方式，打开项目目录，把 `.obsidian/plugins/` 下的 `docxer`、`markitdown`、`md2html`、`obsidian-html-plugin`、`ppt-viewer`、`terminal`、`univer` 七个文件夹复制到自己的 `Vault/.obsidian/plugins/`。
 
-只复制这七个插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
+只复制这些插件文件夹，不要用整个 `.obsidian` 覆盖自己的仓库。复制后重启 Obsidian，在 **设置 → 社区插件** 中启用它们。
 
-如果无法访问插件市场，Smart Composer 可以从作者的 [1.2.9 官方发布页](https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9) 手动安装：下载 `main.js`、`manifest.json`、`styles.css`，放入 `Vault/.obsidian/plugins/smart-composer/`。
+如果无法访问插件市场，可以从作者的 [Smart Composer 1.2.9 官方发布页](https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9) 手动安装。下载 `main.js`、`manifest.json`、`styles.css`，放入 `Vault/.obsidian/plugins/smart-composer/`。
 
 ### 看不到 `.obsidian`？
 
@@ -38,7 +38,7 @@ git clone https://github.com/pherehouse/obsidian-ai-native-starter.git
 
 ## 3. 交给 AI 自动安装（可选）
 
-如果希望让 AI 代为下载和复制，可以使用下面提示词；它与上面的两种手动安装方式任选其一。把提示词复制到 WorkBuddy、TraeWork、Codex 等支持本地文件操作的 AI 工具中，并填入自己的 Vault 路径。
+不想手动复制插件，也可以把下面的提示词交给 WorkBuddy、TraeWork、Codex 等支持本地文件操作的 AI，并填入 Vault 路径。
 
 ```text
 我的 Obsidian 仓库路径是：
@@ -52,17 +52,15 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 2. 只把配置包 .obsidian/plugins/ 下的 docxer、markitdown、md2html、obsidian-html-plugin、ppt-viewer、terminal、univer 七个插件文件夹复制到我的 Vault/.obsidian/plugins/；
 3. 创建 Vault/.obsidian/plugins/smart-composer/，从 Smart Composer 作者的 1.2.9 官方发布页下载 main.js、manifest.json、styles.css 放入该文件夹：https://github.com/glowingjade/obsidian-smart-composer/releases/tag/1.2.9；
 4. 不要覆盖 Vault 中其他插件、主题、快捷键或 workspace 配置；
-5. 如果目标插件已经存在，先备份到 Vault 根目录的“插件备份”文件夹，再复制新版本；不要把备份留在 .obsidian/plugins/ 内；
-6. 在 Vault 根目录新建“收件箱”“工作”“资料”“归档”四个文件夹；
-7. 新建“收件箱/AI 原生起步.md”，说明插件已经复制完成，并提醒我重启 Obsidian 后到“设置 → 社区插件”启用插件；
-8. 不要修改已有笔记；无法下载或无法写入时，直接告诉我具体原因，不要猜测成功。
+5. 如果目标插件已经存在，先备份到 Vault 根目录的 .plugin-backups/，再复制新版本；不要把备份留在 .obsidian/plugins/ 内；
+6. 不要修改已有笔记；无法下载或无法写入时，直接告诉我具体原因，不要猜测成功。
 
 全部完成后，只汇报实际创建和复制了哪些文件。
 ```
 
 如果 AI 工具没有下载或写入本地文件的权限，就手动下载 ZIP 并复制插件。
 
-## 4. 本包包含什么
+## 4. 插件说明
 
 | 类别 | 插件 | 作用 | 版本 | 来源 |
 | --- | --- | --- | --- | --- |
@@ -72,12 +70,10 @@ https://github.com/pherehouse/obsidian-ai-native-starter/archive/refs/heads/main
 | AI 友好文档预览、处理与传播 | HTML Reader | 直接预览 HTML、HTM | 1.0.14 | 基于 [obsidian-html-plugin](https://github.com/nuthrash/obsidian-html-plugin)，由 phere 调整 |
 | AI 友好文档预览、处理与传播 | MarkItDown File Converter | 将 PDF、Word、PPT、Excel、网页等转成 Markdown | 2.1.0 | [obsidian-markitdown](https://github.com/ethanolivertroy/obsidian-markitdown) |
 | AI 友好文档预览、处理与传播 | md2html | 将 Markdown 转为带目录和样式的 HTML，方便浏览器阅读和分享 | 0.1.0 | phere |
-| 在 Obsidian 中使用 AI | Smart Composer | 与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
+| 单独安装 | Smart Composer | 与 AI 对话、引用 Vault 内容并协助编辑笔记 | 1.2.9 | [obsidian-smart-composer](https://github.com/glowingjade/obsidian-smart-composer) |
 | 在 Obsidian 中使用 AI | Terminal | 在 Obsidian 内运行 AI CLI | 3.25.0 | [obsidian-terminal](https://github.com/polyipseity/obsidian-terminal) |
 
-Docxer 横跨前两类能力：既能查看原始 Word，也能生成适合 AI 处理的 Markdown。
-
-其中 PPT Viewer 和 md2html 由 phere 编写；HTML Reader 基于原作者版本调整；其余插件来自表格中链接的原作者项目。
+PPT Viewer、md2html 由 phere 编写；HTML Reader 基于原项目调整；其他插件版权归原作者所有。
 
 MarkItDown 首次使用需要 Python 和 `markitdown` 包，按插件设置中的检查或安装提示操作。
 
@@ -85,15 +81,11 @@ Smart Composer 需要配置自己的模型服务；例如在 **设置 → Smart 
 
 ## 5. 让 AI 更懂 Obsidian：安装 Skill
 
-不必先学习 CLI 命令。WorkBuddy 和 TraeWork 都可以在技能中心搜索 **Obsidian**，直接安装相关技能。
-
-也可以使用 GitHub 上的 [`obsidian-cli` Skill](https://github.com/kepano/obsidian-skills/tree/main/skills/obsidian-cli)。它负责教 AI 使用 Obsidian 的搜索、创建、双链和属性等能力。安装 Skill 后，按工具提示开启 Obsidian CLI 即可。
-
-如果技能中心没有显示，直接把上面的 GitHub 地址导入即可。
+WorkBuddy 和 TraeWork 可以在技能中心搜索 **Obsidian**，安装相关技能。也可以按所用 AI 工具的说明，从 GitHub 安装 [`obsidian-cli` Skill](https://github.com/kepano/obsidian-skills/tree/main/skills/obsidian-cli)。安装后，按提示开启 Obsidian CLI。
 
 ## 6. 下一步
 
-安装完成后，回到配套文章，复制“北京三日游”提示词完成第一次体验。本文档只负责帮助你装好 Obsidian、插件和可选的 AI 能力。
+安装完成后，回到配套文章，复制“北京三日游”提示词完成第一次体验。
 
 ## 版权说明
 
