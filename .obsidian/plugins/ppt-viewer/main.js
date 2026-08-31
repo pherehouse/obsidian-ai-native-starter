@@ -235,7 +235,7 @@ jszip/dist/jszip.min.js:
 // New PPT Reviewer 1.1.0: review-focused reliability and performance layer.
 // This layer intentionally sits after the bundled viewer so it can be maintained
 // independently without altering the original ppt-viewer plugin.
-St="new-ppt-reviewer-view";
+St="ppt-viewer-view";
 const newPptReviewerOriginalOnLoadFile=Ct.prototype.onLoadFile;
 const newPptReviewerOriginalOnUnloadFile=Ct.prototype.onUnloadFile;
 const newPptReviewerOriginalRenderAccurateFromCurrentFile=Ct.prototype.renderAccurateFromCurrentFile;
@@ -1302,6 +1302,7 @@ Ct.prototype.disposeReviewerPdfPreview=function(){
   if(session.intersectionObserver)session.intersectionObserver.disconnect();
   if(session.resizeObserver)session.resizeObserver.disconnect();
   if(session.resizeTimer)clearTimeout(session.resizeTimer);
+  if(session.rerenderAfterCurrent)session.rerenderAfterCurrent.clear();
   for(const task of session.pdfRenderTasks.values())try{task.cancel();}catch(error){}
   session.pdfRenderTasks.clear();
   session.renderPromises.clear();
@@ -1485,9 +1486,9 @@ Ct.prototype.initializeReviewerPdfPreview=async function(session){
     session.resizeObserver=new ResizeObserver(()=>{
       const width=session.pages.clientWidth||0,previous=session.lastResizeWidth||0;
       session.lastResizeWidth=width;
-      if(previous&&width&&Math.abs(width-previous)/previous<.12)return;
+      if(previous&&width&&Math.abs(width-previous)<2)return;
       if(session.resizeTimer)clearTimeout(session.resizeTimer);
-      session.resizeTimer=setTimeout(()=>this.refreshReviewerPdfResolution(session),180);
+      session.resizeTimer=setTimeout(()=>this.refreshReviewerPdfResolution(session),100);
     });
     session.resizeObserver.observe(session.pages);
   }
@@ -1502,7 +1503,10 @@ Ct.prototype.getReviewerPdfTargetWidth=function(session,wrapper,viewport){
 
 Ct.prototype.renderReviewerPdfPage=async function(session,pageNumber,force=false){
   if(!session||this.pptReviewerPdfSession!==session||!session.document||pageNumber<1||pageNumber>session.pageCount)return;
-  if(session.renderPromises.has(pageNumber))return session.renderPromises.get(pageNumber);
+  if(session.renderPromises.has(pageNumber)){
+    if(force&&session.rerenderAfterCurrent)session.rerenderAfterCurrent.add(pageNumber);
+    return session.renderPromises.get(pageNumber);
+  }
   const promise=(async()=>{
     const wrapper=session.wrappers.get(pageNumber);
     if(!wrapper)return;
@@ -1510,6 +1514,7 @@ Ct.prototype.renderReviewerPdfPage=async function(session,pageNumber,force=false
     session.seedPages.delete(pageNumber);
     if(this.pptReviewerPdfSession!==session)return;
     const baseViewport=page.getViewport({scale:1}),cssWidth=this.getReviewerPdfTargetWidth(session,wrapper,baseViewport);
+    wrapper.style.aspectRatio=`${baseViewport.width} / ${baseViewport.height}`;
     const deviceScale=Math.min((typeof window!=="undefined"&&window.devicePixelRatio)||1,2);
     const desiredPixelWidth=Math.min(2880,Math.max(1,Math.round(cssWidth*deviceScale)));
     const previousWidth=session.renderedPixelWidths.get(pageNumber)||0;
@@ -1520,8 +1525,8 @@ Ct.prototype.renderReviewerPdfPage=async function(session,pageNumber,force=false
     if(!context)throw new Error("Canvas 2D context is unavailable");
     canvas.width=Math.max(1,Math.ceil(viewport.width));
     canvas.height=Math.max(1,Math.ceil(viewport.height));
-    canvas.style.width=`${cssWidth}px`;
-    canvas.style.height=`${cssWidth*baseViewport.height/baseViewport.width}px`;
+    canvas.style.width="100%";
+    canvas.style.height="100%";
     context.fillStyle="#ffffff";context.fillRect(0,0,canvas.width,canvas.height);
     const renderTask=page.render({canvasContext:context,viewport});
     session.pdfRenderTasks.set(pageNumber,renderTask);
@@ -1539,7 +1544,12 @@ Ct.prototype.renderReviewerPdfPage=async function(session,pageNumber,force=false
     const wrapper=session.wrappers.get(pageNumber),loading=wrapper&&wrapper.querySelector(".ppt-reviewer-pdf-page-loading");
     if(loading)loading.setText("页面加载失败");
     throw error;
-  }finally{if(session.renderPromises.get(pageNumber)===promise)session.renderPromises.delete(pageNumber);}
+  }finally{
+    if(session.renderPromises.get(pageNumber)===promise)session.renderPromises.delete(pageNumber);
+    if(session.rerenderAfterCurrent&&session.rerenderAfterCurrent.delete(pageNumber)&&this.pptReviewerPdfSession===session){
+      setTimeout(()=>this.renderReviewerPdfPage(session,pageNumber,true).catch(()=>{}),0);
+    }
+  }
 };
 
 Ct.prototype.syncReviewerPdfPreview=function(session){
@@ -1554,7 +1564,7 @@ Ct.prototype.syncReviewerPdfPreview=function(session){
 Ct.prototype.refreshReviewerPdfResolution=function(session){
   if(this.pptReviewerPdfSession!==session)return;
   const current=this.getReviewerCurrentPage(session.pages)||1;
-  for(const pageNumber of [current,current+1])this.renderReviewerPdfPage(session,pageNumber,true).catch(()=>{});
+  for(const pageNumber of [current-1,current,current+1])this.renderReviewerPdfPage(session,pageNumber,true).catch(()=>{});
 };
 
 Ct.prototype.renderAccuratePreviewUI=function(pdfPath){
@@ -1665,7 +1675,7 @@ Ct.prototype.renderReviewerPdfPreviewUI=function(pdfPath){
   const session={
     token:`${Date.now()}-${Math.random()}`,pdfPath,root,pages,status:chrome.status,counter,previousButton,nextButton,
     document:null,loadingTask:null,intersectionObserver:null,resizeObserver:null,resizeTimer:null,
-    wrappers:new Map(),renderPromises:new Map(),pdfRenderTasks:new Map(),renderedPixelWidths:new Map(),seedPages:new Map(),
+    wrappers:new Map(),renderPromises:new Map(),pdfRenderTasks:new Map(),renderedPixelWidths:new Map(),seedPages:new Map(),rerenderAfterCurrent:new Set(),
     pageCount:0,startedAt:Date.now()
   };
   previousButton.addEventListener("click",()=>this.goToReviewerPdfPage(session,(this.getReviewerCurrentPage(session.pages)||1)-1));
@@ -1790,5 +1800,133 @@ Ct.prototype.onLoadFile=async function(file){
   }catch(error){
     if(!isActive())return;
     this.renderReviewerLocalizedError(error,file);
+  }
+};
+
+// PPT Viewer 1.8.2: Windows-safe distribution and conversion pipeline.
+const pptViewerV182ConvertWithMicrosoftPowerPoint=Ct.prototype.convertWithMicrosoftPowerPoint;
+const pptViewerV182ConvertWithLibreOffice=Ct.prototype.convertWithLibreOffice;
+
+Ct.prototype.getLibreOfficeCandidates=function(){
+  const path=require("path"),env=process.env||{};
+  if(process.platform!=="win32")return [
+    "/Applications/LibreOffice.app/Contents/MacOS/soffice",
+    "/usr/local/bin/soffice","/opt/homebrew/bin/soffice","soffice","libreoffice"
+  ];
+  const candidates=[];
+  for(const base of [env.ProgramW6432,env.ProgramFiles,env["ProgramFiles(x86)"]]){
+    if(base)candidates.push(path.join(base,"LibreOffice","program","soffice.exe"));
+  }
+  if(env.LOCALAPPDATA)candidates.push(path.join(env.LOCALAPPDATA,"Programs","LibreOffice","program","soffice.exe"));
+  if(env.USERPROFILE)candidates.push(path.join(env.USERPROFILE,"scoop","apps","libreoffice","current","program","soffice.exe"));
+  candidates.push("soffice.exe","libreoffice.exe");
+  return Array.from(new Set(candidates));
+};
+
+Ct.prototype.getReviewerPowerShellCandidates=function(){
+  const path=require("path"),root=(process.env&&process.env.SystemRoot)||"C:\\Windows";
+  return Array.from(new Set([
+    path.join(root,"System32","WindowsPowerShell","v1.0","powershell.exe"),
+    "powershell.exe","pwsh.exe"
+  ]));
+};
+
+Ct.prototype.buildReviewerWindowsPowerPointCommand=function(sourcePath,pdfPath){
+  const quote=value=>"'"+String(value).replace(/'/g,"''")+"'";
+  return `$ErrorActionPreference='Stop'; Set-StrictMode -Version 2; $app=$null; $presentation=$null; try { $app=New-Object -ComObject PowerPoint.Application; $presentation=$app.Presentations.Open(${quote(sourcePath)}, $true, $false, $false); $presentation.ExportAsFixedFormat(${quote(pdfPath)}, 2); } finally { if($presentation){ try{$presentation.Close()}catch{}; try{[void][Runtime.InteropServices.Marshal]::FinalReleaseComObject($presentation)}catch{} } if($app){ try{$app.Quit()}catch{}; try{[void][Runtime.InteropServices.Marshal]::FinalReleaseComObject($app)}catch{} } [GC]::Collect(); [GC]::WaitForPendingFinalizers(); }`;
+};
+
+Ct.prototype.convertWithMicrosoftPowerPoint=async function(sourcePath,pdfPath){
+  if(process.platform!=="win32")return pptViewerV182ConvertWithMicrosoftPowerPoint.call(this,sourcePath,pdfPath);
+  const fs=require("fs"),path=require("path"),os=require("os"),crypto=require("crypto"),{execFile}=require("child_process"),{promisify}=require("util"),run=promisify(execFile);
+  const fingerprint=crypto.createHash("sha1").update(`${sourcePath}:${process.pid}:${Date.now()}:${crypto.randomBytes(6).toString("hex")}`).digest("hex").slice(0,16);
+  const stageDir=path.join(os.tmpdir(),`obsidian-ppt-reviewer-win-${fingerprint}`),extension=path.extname(sourcePath)||".pptx";
+  const stagedSource=path.join(stageDir,`source${extension}`),stagedPdf=path.join(stageDir,"preview.pdf");
+  fs.mkdirSync(stageDir,{recursive:true});
+  fs.copyFileSync(sourcePath,stagedSource);
+  let lastError=null;
+  try{
+    const command=this.buildReviewerWindowsPowerPointCommand(stagedSource,stagedPdf);
+    for(const powerShell of this.getReviewerPowerShellCandidates()){
+      try{
+        await run(powerShell,["-NoLogo","-NoProfile","-NonInteractive","-ExecutionPolicy","Bypass","-Command",command],{timeout:120e3,windowsHide:true});
+        lastError=null;
+        break;
+      }catch(error){
+        lastError=error;
+        if(error&&error.code!=="ENOENT")break;
+      }
+    }
+    if(lastError)throw lastError;
+    if(!fs.existsSync(stagedPdf)||fs.statSync(stagedPdf).size<1024)throw new Error("PowerPoint did not create a valid PDF preview");
+    fs.mkdirSync(path.dirname(pdfPath),{recursive:true});
+    fs.copyFileSync(stagedPdf,pdfPath);
+    return pdfPath;
+  }finally{fs.rmSync(stageDir,{recursive:true,force:true});}
+};
+
+Ct.prototype.convertWithLibreOffice=async function(sourcePath,cache){
+  if(process.platform!=="win32")return pptViewerV182ConvertWithLibreOffice.call(this,sourcePath,cache);
+  const fs=require("fs"),path=require("path"),os=require("os"),crypto=require("crypto"),{pathToFileURL}=require("url"),{execFile}=require("child_process"),{promisify}=require("util"),run=promisify(execFile);
+  const fingerprint=crypto.createHash("sha1").update(`${sourcePath}:${process.pid}:${Date.now()}`).digest("hex").slice(0,16);
+  const stageDir=path.join(os.tmpdir(),`obsidian-ppt-reviewer-lo-${fingerprint}`),profileDir=path.join(stageDir,"profile"),extension=path.extname(sourcePath)||".pptx";
+  const stagedSource=path.join(stageDir,`source${extension}`),stagedPdf=path.join(stageDir,"source.pdf");
+  fs.mkdirSync(profileDir,{recursive:true});
+  fs.copyFileSync(sourcePath,stagedSource);
+  let lastError=null;
+  try{
+    for(const binary of this.getLibreOfficeCandidates()){
+      if(path.isAbsolute(binary)&&!fs.existsSync(binary))continue;
+      try{
+        await run(binary,[`-env:UserInstallation=${pathToFileURL(profileDir).href}`,"--headless","--nologo","--nodefault","--nofirststartwizard","--convert-to","pdf","--outdir",stageDir,stagedSource],{timeout:120e3,windowsHide:true});
+        if(fs.existsSync(stagedPdf)&&fs.statSync(stagedPdf).size>=1024){lastError=null;break;}
+        lastError=new Error("LibreOffice did not create a valid PDF preview");
+      }catch(error){lastError=error;}
+    }
+    if(lastError||!fs.existsSync(stagedPdf))throw lastError||new Error("LibreOffice is unavailable");
+    fs.mkdirSync(cache.dir,{recursive:true});
+    fs.copyFileSync(stagedPdf,cache.pdfPath);
+    return cache.pdfPath;
+  }finally{fs.rmSync(stageDir,{recursive:true,force:true});}
+};
+
+Ct.prototype.renderReviewerWindowsCompatibilityFallback=async function(file,requestId,originalError){
+  if(process.platform!=="win32"||String(file&&file.extension||"").toLowerCase()!=="pptx")return false;
+  try{
+    const binary=await this.app.vault.readBinary(file);
+    if(this.pptReviewerRequestId!==requestId)return true;
+    this.slides=[];this.currentSlide=0;this.mediaCache.clear();this.relationships.clear();
+    await this.parsePPTX(binary);
+    if(this.pptReviewerRequestId!==requestId)return true;
+    if(!this.slides.length)throw new Error("No slides found in the presentation");
+    this.pptReviewerRenderEngine="兼容预览";
+    this.renderUI();
+    this.finalizeReviewerImageFallback();
+    new ht.Notice("已自动使用兼容预览");
+    console.info("[PPT Viewer] Windows native conversion unavailable; compatibility preview opened:",originalError&&originalError.message?originalError.message:originalError);
+    return true;
+  }catch(error){
+    console.warn("[PPT Viewer] Windows compatibility preview failed:",error&&error.message?error.message:error);
+    return false;
+  }
+};
+
+Ct.prototype.onLoadFile=async function(file){
+  this.disposeReviewerPdfPreview();
+  const requestId=(this.pptReviewerRequestId||0)+1;
+  this.pptReviewerRequestId=requestId;
+  const isActive=()=>this.pptReviewerRequestId===requestId;
+  this.file=file;
+  this.renderReviewerLoading(file);
+  this.slides=[];this.currentSlide=0;this.mediaCache.clear();this.relationships.clear();
+  try{
+    const pdfPath=await this.renderAccuratePreview(file);
+    if(!isActive())return;
+    if(!pdfPath)throw new Error("No PDF preview was created");
+    this.renderReviewerPdfPreviewUI(pdfPath);
+  }catch(error){
+    if(!isActive())return;
+    if(await this.renderReviewerWindowsCompatibilityFallback(file,requestId,error))return;
+    if(isActive())this.renderReviewerLocalizedError(error,file);
   }
 };

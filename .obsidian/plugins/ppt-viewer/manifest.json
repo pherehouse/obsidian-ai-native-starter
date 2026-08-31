@@ -1,7 +1,7 @@
 {
-  "id": "new-ppt-reviewer",
-  "name": "New PPT Reviewer",
-  "version": "1.8.0",
+  "id": "ppt-viewer",
+  "name": "PPT Viewer",
+  "version": "1.8.2",
   "minAppVersion": "0.15.0",
   "description": "跨 Windows 和 macOS 的高保真 PPT 审阅器，后台转为 PDF 并按需快速预览，支持简洁审阅和无干扰全屏。",
   "author": "phere",
